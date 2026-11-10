@@ -15,12 +15,14 @@
   ctx.imageSmoothingEnabled = true;
   ctx.imageSmoothingQuality = 'high';
 
+  const hudTime = document.getElementById('hud-time');
   const hudPct = document.getElementById('hud-pct');
+  const navRingFill = document.getElementById('nav-ring-fill');
   const topLaserBar = document.getElementById('top-laser-bar');
   const preloadStatus = document.getElementById('preload-status');
   const fourPillarsOverlay = document.getElementById('anor-four-pillars-overlay');
 
-  const navBtns = Array.from(document.querySelectorAll('.cnav-btn[data-scroll-to]'));
+  const navBtns = Array.from(document.querySelectorAll('.nav-btn[data-scroll-to]'));
   const pillarCards = {
     reality: document.getElementById('pillar-card-reality'),
     ai: document.getElementById('pillar-card-ai'),
@@ -203,12 +205,20 @@
   }
 
   function updateUI(p) {
-    const pct = String(Math.round(p * 100)).padStart(2, '0');
+    const pct = Math.round(p * 100);
+    const sec = (p * 14.93).toFixed(2).padStart(5, '0');
+
     if (hudPct) hudPct.textContent = `${pct}%`;
+    if (hudTime) hudTime.textContent = `${sec}s`;
     if (topLaserBar) topLaserBar.style.width = `${(p * 100).toFixed(2)}%`;
 
-    // Show/hide the 4-Pillar Pomegranate Seed Matrix when the pomegranate is open (41% to 72%)
-    const inFourSeedZone = p >= 0.41 && p <= 0.72;
+    if (navRingFill) {
+      const circumference = 94.2;
+      navRingFill.style.strokeDashoffset = (circumference * (1 - p)).toFixed(2);
+    }
+
+    // Show/hide the 4-Pillar Pomegranate Seed Matrix when the pomegranate is open (39% to 74%)
+    const inFourSeedZone = p >= 0.39 && p <= 0.74;
     if (fourPillarsOverlay) {
       fourPillarsOverlay.classList.toggle('visible', inFourSeedZone);
     }
