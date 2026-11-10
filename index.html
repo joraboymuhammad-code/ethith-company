@@ -7,35 +7,35 @@
   <title>ETHITH Company — Global Digital Ecosystem | Created by Jo'raboyev Muhammadyusuf</title>
   <meta name="description" content="ETHITH Company — Jo'raboyev Muhammadyusuf tomonidan yaratilgan global raqamli ekotizim: ETHITH AI, ETHITH Reality, ETHITH Games (QDY & Realm of Warriors), va ETHITH Solutions." />
 
-  <!-- Preload initial key frames & emblem for instant opening -->
+  <!-- Preload initial key frame & emblem for instant opening -->
   <link rel="preload" as="image" href="assets/frames/f_000.webp?cb=v300_clean" fetchpriority="high" />
   <link rel="preload" as="image" href="assets/emblem.webp" fetchpriority="high" />
 
-  <!-- Modern Luxury Typography: Syne, Plus Jakarta Sans, Space Grotesk & JetBrains Mono -->
+  <!-- Clean Modern Geometric Fonts (No stretched Syne font) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700&family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
 
   <link rel="icon" type="image/webp" href="assets/emblem.webp" />
-  <link rel="stylesheet" href="styles.css?v=2026.7" />
+  <link rel="stylesheet" href="styles.css?v=2026.8" />
 </head>
 <body>
 
-  <!-- FIXED FULLSCREEN CRYSTAL-CLEAR 1080P VIDEO / FRAME SCRUBBER STAGE -->
+  <!-- FIXED FULLSCREEN CRYSTAL-CLEAR 1080P VIDEO / FRAME SCRUBBER STAGE (UNTOUCHED) -->
   <div id="video-stage" aria-hidden="true">
     <canvas id="scrubber-canvas" width="1600" height="900"></canvas>
     <div class="edge-vignette"></div>
   </div>
 
-  <!-- FIXED TOP NAVIGATION BAR (Previous Clean Style + Modernized Typography) -->
+  <!-- FIXED TOP NAVIGATION BAR (Transparent Neon, Clean Proportions, No Timeline/Scroll Clutter) -->
   <header class="top-nav" id="top-nav">
     <a href="#top" class="brand-identity" data-scroll-to="0" aria-label="ETHITH Company Bosh sahifa">
       <div class="emblem-wrap">
-        <img src="assets/emblem.webp" alt="ETHITH Company Neon Emblem" class="nav-emblem" />
+        <img src="assets/emblem.webp" alt="ETHITH Emblem" class="nav-emblem" />
       </div>
       <div class="brand-text">
         <span class="brand-name">ETHITH</span>
-        <span class="brand-sub">COMPANY ECOSYSTEM</span>
+        <span class="brand-sub">GLOBAL ECOSYSTEM</span>
       </div>
     </a>
 
@@ -48,28 +48,14 @@
       <button type="button" class="nav-btn" data-scroll-to="0.59">ETHITH Games</button>
       <button type="button" class="nav-btn" data-scroll-to="0.66">ETHITH Solutions</button>
       <button type="button" class="nav-btn" data-scroll-to="0.83">Salohiyat</button>
-      <button type="button" class="nav-btn nav-cta" data-scroll-to="0.98">Bog'lanish</button>
     </nav>
 
-    <div class="hud-telemetry">
-      <div class="telemetry-item">
-        <span class="telemetry-label">TIMELINE</span>
-        <span class="telemetry-val" id="hud-time">00.00s</span>
-      </div>
-      <div class="telemetry-item">
-        <span class="telemetry-label">SCROLL</span>
-        <span class="telemetry-val" id="hud-pct">0%</span>
-      </div>
-      <div class="scroll-progress-ring">
-        <svg viewBox="0 0 36 36">
-          <circle class="ring-bg" cx="18" cy="18" r="15"></circle>
-          <circle class="ring-fill" id="nav-ring-fill" cx="18" cy="18" r="15" stroke-dasharray="94.2" stroke-dashoffset="94.2"></circle>
-        </svg>
-      </div>
+    <div class="nav-right-action">
+      <button type="button" class="nav-btn nav-cta" data-scroll-to="0.98">Bog‘lanish</button>
     </div>
   </header>
 
-  <!-- FIXED 4-PILLAR ANOR SEED CALLOUT OVERLAY (Active when 4 pomegranate seeds are visible: 39% to 75% scroll) -->
+  <!-- FIXED 4-PILLAR ANOR SEED CALLOUT OVERLAY (Active when 4 pomegranate seeds are visible: 40% to 71% scroll) -->
   <div id="anor-four-pillars-overlay" class="four-pillars-overlay" aria-live="polite">
     <!-- Dynamic SVG HUD Connector Lines pointing from the 4 edge cards directly to the 4 pomegranate seeds -->
     <svg id="seed-connectors-svg" class="seed-connectors-svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
@@ -79,15 +65,15 @@
           <stop offset="100%" stop-color="#ff2a5f" />
         </linearGradient>
         <linearGradient id="grad-ai" x1="100%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="#a855f7" />
+          <stop offset="0%" stop-color="#c084fc" />
           <stop offset="100%" stop-color="#ff2a5f" />
         </linearGradient>
         <linearGradient id="grad-games" x1="0%" y1="100%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="#f59e0b" />
+          <stop offset="0%" stop-color="#fbbf24" />
           <stop offset="100%" stop-color="#ff2a5f" />
         </linearGradient>
         <linearGradient id="grad-solutions" x1="100%" y1="100%" x2="0%" y2="0%">
-          <stop offset="0%" stop-color="#10b981" />
+          <stop offset="0%" stop-color="#34d399" />
           <stop offset="100%" stop-color="#ff2a5f" />
         </linearGradient>
         <filter id="neon-glow" x="-30%" y="-30%" width="160%" height="160%">
@@ -109,38 +95,31 @@
       <!-- Connector 2: Top-Right Card -> Seed 2 (ETHITH AI) -->
       <g id="hud-line-2" class="hud-connector">
         <polyline id="poly-2" points="1535,220 1450,220 1215,115" fill="none" stroke="url(#grad-ai)" stroke-width="2.2" filter="url(#neon-glow)" stroke-dasharray="6 4" />
-        <circle id="seed-ring-2" cx="1215" cy="115" r="22" fill="none" stroke="#a855f7" stroke-width="2" filter="url(#neon-glow)" />
-        <circle id="seed-dot-2" cx="1215" cy="115" r="5" fill="#a855f7" />
+        <circle id="seed-ring-2" cx="1215" cy="115" r="22" fill="none" stroke="#c084fc" stroke-width="2" filter="url(#neon-glow)" />
+        <circle id="seed-dot-2" cx="1215" cy="115" r="5" fill="#c084fc" />
       </g>
 
       <!-- Connector 3: Bottom-Left Card -> Seed 3 (ETHITH Games) -->
       <g id="hud-line-3" class="hud-connector">
         <polyline id="poly-3" points="385,840 500,840 715,825" fill="none" stroke="url(#grad-games)" stroke-width="2.2" filter="url(#neon-glow)" stroke-dasharray="6 4" />
-        <circle id="seed-ring-3" cx="715" cy="825" r="22" fill="none" stroke="#f59e0b" stroke-width="2" filter="url(#neon-glow)" />
-        <circle id="seed-dot-3" cx="715" cy="825" r="5" fill="#f59e0b" />
+        <circle id="seed-ring-3" cx="715" cy="825" r="22" fill="none" stroke="#fbbf24" stroke-width="2" filter="url(#neon-glow)" />
+        <circle id="seed-dot-3" cx="715" cy="825" r="5" fill="#fbbf24" />
       </g>
 
       <!-- Connector 4: Bottom-Right Card -> Seed 4 (ETHITH Solutions) -->
       <g id="hud-line-4" class="hud-connector">
         <polyline id="poly-4" points="1535,840 1450,840 1540,595" fill="none" stroke="url(#grad-solutions)" stroke-width="2.2" filter="url(#neon-glow)" stroke-dasharray="6 4" />
-        <circle id="seed-ring-4" cx="1540" cy="595" r="22" fill="none" stroke="#10b981" stroke-width="2" filter="url(#neon-glow)" />
-        <circle id="seed-dot-4" cx="1540" cy="595" r="5" fill="#10b981" />
+        <circle id="seed-ring-4" cx="1540" cy="595" r="22" fill="none" stroke="#34d399" stroke-width="2" filter="url(#neon-glow)" />
+        <circle id="seed-dot-4" cx="1540" cy="595" r="5" fill="#34d399" />
       </g>
     </svg>
-
-    <!-- Top Center Floating Status Badge during 4-Seed Split -->
-    <div class="pillars-stage-header">
-      <span class="pillars-stage-tag">ETHITH CORE ECOSYSTEM • 4 ASOSIY KOMPONENT</span>
-      <h2 class="pillars-stage-title">Har bir anor donasi — o‘z sohasida inqilobiy yechim beruvchi texnologik gigant</h2>
-    </div>
 
     <!-- PILLAR 1: TOP-LEFT (ETHITH REALITY) -->
     <article class="pillar-card pillar-tl" id="pillar-card-reality" data-pillar="reality">
       <div class="pillar-header">
-        <span class="pillar-index">01 // REALITY</span>
-        <span class="pillar-badge badge-cyan">INTERACTIVE 3D & VIP</span>
+        <span class="pillar-badge badge-cyan">INTERACTIVE 3D & VIP VEB</span>
       </div>
-      <h3 class="pillar-title title-cyan-glow">ETHITH Reality</h3>
+      <h3 class="pillar-title title-cyan-neon">ETHITH Reality</h3>
       <p class="pillar-desc">
         Standart "vizitka" saytlardan voz kechib, foydalanuvchini vizual sayohatga olib chiquvchi va <strong>maxsus buyurtma (zakaz)</strong> asosida quriluvchi yuqori tizimlar:
       </p>
@@ -154,10 +133,9 @@
     <!-- PILLAR 2: TOP-RIGHT (ETHITH AI) -->
     <article class="pillar-card pillar-tr" id="pillar-card-ai" data-pillar="ai">
       <div class="pillar-header">
-        <span class="pillar-index">02 // ARTIFICIAL INTELLIGENCE</span>
-        <span class="pillar-badge badge-purple">15M–2H KINO & KOD</span>
+        <span class="pillar-badge badge-purple">NEURAL AI • 15M–2H KINO & KOD</span>
       </div>
-      <h3 class="pillar-title title-purple-glow">ETHITH AI</h3>
+      <h3 class="pillar-title title-purple-neon">ETHITH AI</h3>
       <p class="pillar-desc">
         Kompaniyaning "miya" qismi — Claude’dan ham yuqori kontekstda <strong>kunlab kod yozuvchi</strong> va <strong>15 minutdan 2 soatgacha</strong> kino darajasida video yaratuvchi AI:
       </p>
@@ -171,10 +149,9 @@
     <!-- PILLAR 3: BOTTOM-LEFT (ETHITH GAMES) -->
     <article class="pillar-card pillar-bl" id="pillar-card-games" data-pillar="games">
       <div class="pillar-header">
-        <span class="pillar-index">03 // NEXT-GEN GAMING</span>
-        <span class="pillar-badge badge-amber">UNREAL ENGINE 5.8.3</span>
+        <span class="pillar-badge badge-amber">UNREAL ENGINE 5.8.3 STUDIO</span>
       </div>
-      <h3 class="pillar-title title-amber-glow">ETHITH Games</h3>
+      <h3 class="pillar-title title-amber-neon">ETHITH Games</h3>
       <p class="pillar-desc">
         <strong>Unreal Engine 5</strong> va 3D modellashtirish (Blender, light-baking) asosida yaratilayotgan yirik o‘yin loyihalari studiyasi:
       </p>
@@ -187,10 +164,9 @@
     <!-- PILLAR 4: BOTTOM-RIGHT (ETHITH SOLUTIONS) -->
     <article class="pillar-card pillar-br" id="pillar-card-solutions" data-pillar="solutions">
       <div class="pillar-header">
-        <span class="pillar-index">04 // B2B & SAAS PLATFORM</span>
-        <span class="pillar-badge badge-emerald">1500+ TAYYOR SHABLONLAR</span>
+        <span class="pillar-badge badge-emerald">1500+ TAYYOR AI SHABLONLAR</span>
       </div>
-      <h3 class="pillar-title title-emerald-glow">ETHITH Solutions</h3>
+      <h3 class="pillar-title title-emerald-neon">ETHITH Solutions</h3>
       <p class="pillar-desc">
         <strong>1500+ shablonlar</strong> va <strong>ETHITH AI</strong> yordamida har kim kam mablag‘ga o‘z tizimini mustaqil qura oladigan B2B va ta’lim platformasi:
       </p>
@@ -202,30 +178,16 @@
     </article>
   </div>
 
-  <!-- MAIN SCROLLABLE STORY CONTAINER (Previous Clean Layout + Modernized Typography) -->
+  <!-- MAIN SCROLLABLE STORY CONTAINER (Transparent Neon Glass Cards) -->
   <main id="scroll-container" class="scroll-container">
 
-    <!-- SECTION 1: HERO / ETHITH COMPANY INTRO (0% - 16% Scroll) -->
-    <!-- Only Left Flank Panel (Right-side small stat boxes removed as requested!) -->
+    <!-- SECTION 1: HERO / ETHITH COMPANY INTRO -->
     <section class="story-section section-hero" id="top">
       <div class="hero-split-layout">
         <div class="hero-panel hero-panel-left">
-          <div class="hero-emblem-showcase">
-            <img src="assets/emblem.webp" alt="ETHITH Company Emblem" class="hero-emblem-img" />
-            <div class="emblem-meta">
-              <span class="meta-code">OFFICIAL EMBLEM // ETHITH CORP</span>
-              <span class="meta-desc">Global Raqamli Ekotizim va Innovatsion Korporatsiya</span>
-            </div>
-          </div>
-
-          <div class="eyebrow-pill">
-            <span class="pulse-dot"></span>
-            GLOBAL TECH CONGLOMERATE • 4 CORE PILLARS
-          </div>
-
           <h1 class="hero-title">
-            <span class="title-gradient">ETHITH</span>
-            <span class="title-outline">COMPANY</span>
+            <span class="hero-title-main">ETHITH</span>
+            <span class="hero-title-sub">COMPANY</span>
           </h1>
 
           <p class="hero-lead">
@@ -233,28 +195,28 @@
           </p>
 
           <p class="hero-sublead">
-            Kompaniyaning boshqaruv asosi <span class="text-glow-pink">"To‘rt yo‘nalish" (Anor donalari)</span> falsafasi ustiga qurilgan — pastga skroll qilishingiz bilan <strong>ETHITH Reality</strong>, <strong>ETHITH AI</strong>, <strong>ETHITH Games</strong> va <strong>ETHITH Solutions</strong> namoyon bo‘ladi.
+            Kompaniyaning boshqaruv asosi <span class="text-glow-pink">"To‘rt yo‘nalish" (Anor donalari)</span> falsafasi ustiga qurilgan — pastga skroll qilishingiz bilan <span class="text-glow-cyan">ETHITH Reality</span>, <span class="text-glow-purple">ETHITH AI</span>, <span class="text-glow-amber">ETHITH Games</span> va <span class="text-glow-emerald">ETHITH Solutions</span> namoyon bo‘ladi.
           </p>
 
           <div class="hero-actions">
             <button type="button" class="btn-primary" data-scroll-to="0.55">
-              <span>4 Komponentni Ko'rish</span>
+              <span>4 Yo‘nalishni Ko‘rish</span>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
             </button>
             <button type="button" class="btn-glass" data-scroll-to="0.98">
-              <span>Bog'lanish</span>
+              <span>Bog‘lanish</span>
             </button>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- SECTION 2: FOUNDER & VISIONARY LEADER — JO'RABOYEV MUHAMMADYUSUF (16% - 28% Scroll) -->
+    <!-- SECTION 2: FOUNDER & VISIONARY LEADER — JO'RABOYEV MUHAMMADYUSUF -->
     <section class="story-section section-genesis" id="founder">
       <div class="genesis-flank-wrapper">
-        <div class="genesis-card genesis-left">
-          <span class="section-tag">01 // ASOSCHI VA VISIONARY RAHBAR</span>
-          <h2 class="modern-heading-gradient">👑 Jo‘raboyev Muhammadyusuf</h2>
+        <div class="genesis-card genesis-left neon-card-cyan">
+          <span class="section-tag">ASOSCHI VA BOSH ARXITEKTOR</span>
+          <h2 class="neon-heading">Jo‘raboyev Muhammadyusuf</h2>
           <p>
             <strong>ETHITH Company</strong>’ning barcha texnologik va strategik g‘oyalari ortida uning asoschisi, bosh arxitektori va visionary rahbari — <span class="text-glow-cyan">Jo‘raboyev Muhammadyusuf</span> turadi.
           </p>
@@ -263,62 +225,62 @@
           </p>
         </div>
 
-        <div class="genesis-card genesis-right">
-          <span class="section-tag">02 // "AWWWARDS" FALSAFASI VA MISSIYA</span>
-          <h3 class="modern-heading-gradient">Made in Uzbekistan — Global IT Standarti</h3>
+        <div class="genesis-card genesis-right neon-card-pink">
+          <span class="section-tag tag-pink">FALSAFA VA GLOBAL MISSIYA</span>
+          <h3 class="neon-heading">Made in Uzbekistan — Global IT Standarti</h3>
           <p>
             Uning falsafasi — oddiy, zerikarli va standart sayt/dasturlar davrini tugatib, har bir raqamli mahsulotni kinematografik san’at asari va yashin tezligida ishlovchi <span class="text-glow-pink">"Awwwards" darajasidagi premium tajribaga</span> aylantirishdir.
           </p>
           <p>
-            Muhammadyusuf ETHITH loyihalari orqali O‘zbekistonning IT salohiyatini global darajada ko‘tarishni va jahon bozorida <strong>"Made in Uzbekistan"</strong> brendi ostida raqobatbardosh ekotizimlarni taqdim etishni maqsad qilgan.
+            Muhammadyusuf ETHITH loyihalari orqali O‘zbekistonning IT salohiyatini global darajada ko‘tarishni va jahon bozorida <span class="text-glow-cyan">"Made in Uzbekistan"</span> brendi ostida raqobatbardosh ekotizimlarni taqdim etishni maqsad qilgan.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- SECTION 3: INTERACTIVE STORYTELLING & 4 PILLARS OVERVIEW (28% - 40% Scroll) -->
+    <!-- SECTION 3: INTERACTIVE STORYTELLING & 4 PILLARS OVERVIEW -->
     <section class="story-section section-genesis" id="architecture">
       <div class="genesis-flank-wrapper">
-        <div class="genesis-card genesis-left">
-          <span class="section-tag">03 // EKOTIZIM ARXITEKTURASI</span>
-          <h2 class="modern-heading-gradient">Yagona O‘zakdan — To‘rt Inqilobiy Yo‘nalishga</h2>
+        <div class="genesis-card genesis-left neon-card-purple">
+          <span class="section-tag tag-purple">EKOTIZIM ARXITEKTURASI</span>
+          <h2 class="neon-heading">Yagona O‘zakdan — To‘rt Inqilobiy Yo‘nalishga</h2>
           <p>
             Foydalanuvchi sahifani skroll qilganda oldindan yaratilgan yuqori sifatli 3D va AI videolari silliq (<span class="text-glow-cyan">0.001 soniya kechikishsiz</span>) harakatga keladigan <strong>Image Sequence</strong> texnologiyasi ishlaydi.
           </p>
           <p>
-            Tepadan aylanmasdan tushadigan, yorilib ichidan <strong>4 ta donasi (yo‘nalishlari)</strong> chiqadigan va qaytib vaqt orqaga qaytgandek yopiladigan interaktiv anor ssenariysi — kompaniyamizning 4 ta ustunini namoyon etadi.
+            Tepadan aylanmasdan tushadigan, yorilib ichidan <span class="text-glow-pink">4 ta donasi (yo‘nalishlari)</span> chiqadigan va qaytib vaqt orqaga qaytgandek yopiladigan interaktiv anor ssenariysi — kompaniyamizning 4 ta ustunini namoyon etadi.
           </p>
         </div>
 
-        <div class="genesis-card genesis-right">
-          <span class="section-tag">04 // INTERAKTIV NAZORAT</span>
-          <h3 class="modern-heading-gradient">4 Komponent Uyg‘unligi</h3>
+        <div class="genesis-card genesis-right neon-card-emerald">
+          <span class="section-tag tag-emerald">TO‘RT YO‘NALISH TIZIMI</span>
+          <h3 class="neon-heading">4 Komponent Uyg‘unligi</h3>
           <div class="mini-pillar-list">
             <div class="mini-pillar-item">
               <span class="dot-cyan"></span>
               <div>
-                <strong>ETHITH Reality</strong>
+                <strong class="text-glow-cyan">ETHITH Reality</strong>
                 <small>Interactive 3D Veb, Zarbdor Maktabi 3D Ekotizimi va 1v1 STEM Kiber-Arena</small>
               </div>
             </div>
             <div class="mini-pillar-item">
               <span class="dot-purple"></span>
               <div>
-                <strong>ETHITH AI</strong>
+                <strong class="text-glow-purple">ETHITH AI</strong>
                 <small>Multi-modal AI Agentlar, Google DeepMind / Veo / Sora (15m–2h kino) va kunlab kod yozish</small>
               </div>
             </div>
             <div class="mini-pillar-item">
               <span class="dot-amber"></span>
               <div>
-                <strong>ETHITH Games</strong>
+                <strong class="text-glow-amber">ETHITH Games</strong>
                 <small>Qadimgi Dunyo Yurishlari (Tarixi Turkiston) va Realm of Warriors (UE 5.8.3)</small>
               </div>
             </div>
             <div class="mini-pillar-item">
               <span class="dot-emerald"></span>
               <div>
-                <strong>ETHITH Solutions</strong>
+                <strong class="text-glow-emerald">ETHITH Solutions</strong>
                 <small>1500+ shablonlar, English House ERP, MATHstar, CD-IELTS va VortexUI Pro</small>
               </div>
             </div>
@@ -327,7 +289,7 @@
       </div>
     </section>
 
-    <!-- SECTION 4: DEDICATED SCROLL SPACE FOR THE 4 POMEGRANATE SEEDS SHOWCASE (40% - 75% Scroll) -->
+    <!-- SECTION 4: DEDICATED SCROLL SPACE FOR THE 4 POMEGRANATE SEEDS SHOWCASE (40% - 71% Scroll) -->
     <section class="story-section section-four-seeds-runway" id="four-pillars-runway" aria-label="4 Asosiy Komponent — Anor Donalari">
       <div class="seed-waypoint" data-focus-pillar="all"></div>
       <div class="seed-waypoint" data-focus-pillar="reality"></div>
@@ -337,12 +299,12 @@
       <div class="seed-waypoint" data-focus-pillar="all"></div>
     </section>
 
-    <!-- SECTION 5: GLOBAL BUSINESS VALUATION & "WOW" EFFECT (75% - 90% Scroll) -->
+    <!-- SECTION 5: GLOBAL BUSINESS VALUATION & "WOW" EFFECT -->
     <section class="story-section section-comparison" id="valuation">
       <div class="comparison-split">
-        <div class="comp-panel comp-left">
-          <span class="section-tag">05 // KELAJAKDAGI MAQSAD VA BIZNES SALOHIYATI</span>
-          <h2 class="modern-heading-gradient">$1,000 – $5,000 va Xalqaro $10,000+ Qiymat</h2>
+        <div class="comp-panel comp-left neon-card-cyan">
+          <span class="section-tag">BIZNES SALOHIYATI VA QIYMAT</span>
+          <h2 class="neon-heading">$1,000 – $5,000 va Xalqaro $10,000+ Qiymat</h2>
           <p>
             <strong>ETHITH Company</strong> shunchaki buyurtma asosida oddiy saytlar qiluvchi jamoa emas:
           </p>
@@ -350,32 +312,32 @@
             <div class="vs-item vs-reality">
               <h4>Premium 3D-Veb Platformalar Eksporti</h4>
               <p>
-                Bitta mukammal, silliq, yuqori texnologiyali kinematografik 3D-veb platformani (anor va maktab loyihasi kabi) bozorda <strong>$1,000 dan $5,000 gacha (xalqaro bozorda $10,000+)</strong> qiymatda sota oladigan brend obro‘sini shakllantirmoqda.
+                Bitta mukammal, silliq, yuqori texnologiyali kinematografik 3D-veb platformani (anor va maktab loyihasi kabi) bozorda <span class="text-glow-cyan">$1,000 dan $5,000 gacha (xalqaro bozorda $10,000+)</span> qiymatda sota oladigan brend obro‘sini shakllantirmoqda.
               </p>
             </div>
             <div class="vs-item vs-solutions">
               <h4>ETHITH Reality vs ETHITH Solutions</h4>
               <p>
-                <strong>Reality</strong> yirik buyurtmalar (zakaz) asosida eksklyuziv qurib berilsa, <strong>Solutions</strong>’da insonlar kam mablag‘ evaziga 1500+ shablonlar va ETHITH AI yordamida o‘z tizimini mustaqil qura oladilar.
+                <span class="text-glow-cyan">Reality</span> yirik buyurtmalar (zakaz) asosida eksklyuziv qurib berilsa, <span class="text-glow-emerald">Solutions</span>’da insonlar kam mablag‘ evaziga 1500+ shablonlar va ETHITH AI yordamida o‘z tizimini mustaqil qura oladilar.
               </p>
             </div>
           </div>
         </div>
 
-        <div class="comp-panel comp-right">
-          <span class="section-tag">06 // "WOW" EFFEKT VA TEXNOLOGIK IMPERIYA</span>
-          <h2 class="modern-heading-gradient">Raqamli Dunyo Standartlarini Qayta Yozish</h2>
+        <div class="comp-panel comp-right neon-card-purple">
+          <span class="section-tag tag-purple">"WOW" EFFEKT VA TEXNOLOGIK IMPERIYA</span>
+          <h2 class="neon-heading">Raqamli Dunyo Standartlarini Qayta Yozish</h2>
           <div class="vs-box">
             <div class="vs-item vs-ai">
               <h4>Google Veo / DeepMind va AI Storytelling</h4>
               <p>
-                "Raqamli storytelling" va ilg‘or AI model integratsiyalarini standart andozalarga aylantirib, har bir foydalanuvchini shunchaki tomoshabin emas, balki katta bir <strong>"WOW" hissiyoti</strong> ichidagi faol ishtirokchiga aylantiradi.
+                "Raqamli storytelling" va ilg‘or AI model integratsiyalarini standart andozalarga aylantirib, har bir foydalanuvchini shunchaki tomoshabin emas, balki katta bir <span class="text-glow-pink">"WOW" hissiyoti</span> ichidagi faol ishtirokchiga aylantiradi.
               </p>
             </div>
             <div class="vs-item vs-games">
               <h4>Yagona Texnologik Karkas</h4>
               <p>
-                <strong>ETHITH Company</strong> — Jo‘raboyev Muhammadyusufning tinimsiz izlanishlari, kuchli dasturlash karkasi (<strong>Next.js, Three.js, GSAP, Node.js, Unreal Engine 5.8.3</strong>) va sun’iy intellekt olamidagi eng so‘nggi texnologiyalar uyg‘unligidir!
+                <strong>ETHITH Company</strong> — Jo‘raboyev Muhammadyusufning tinimsiz izlanishlari, kuchli dasturlash karkasi (<span class="text-glow-amber">Next.js, Three.js, GSAP, Node.js, Unreal Engine 5.8.3</span>) va sun’iy intellekt olamidagi eng so‘nggi texnologiyalar uyg‘unligidir!
               </p>
             </div>
           </div>
@@ -383,15 +345,13 @@
       </div>
     </section>
 
-    <!-- SECTION 6: OFFICIAL CONTACT & FOOTER (90% - 100% Scroll) -->
+    <!-- SECTION 6: CONTACT & FOOTER (Transparent Neon Glass, No Redundant Top Emblem/Official Text) -->
     <section class="story-section section-contact" id="contact">
       <div class="contact-shell">
         <div class="contact-header">
-          <img src="assets/emblem.webp" alt="ETHITH Company Emblem" class="footer-emblem" />
-          <span class="section-tag">OFFICIAL DIRECT CHANNELS</span>
-          <h2 class="contact-title modern-heading-gradient">ETHITH Company Bilan Bog‘lanish</h2>
+          <h2 class="contact-title neon-heading">ETHITH Company Bilan Bog‘lanish</h2>
           <p class="contact-sub">
-            ETHITH Reality, ETHITH AI, ETHITH Games yoki ETHITH Solutions bo‘yicha hamkorlik va murojaatlar uchun rasmiy aloqa tarmoqlarimiz:
+            <span class="text-glow-cyan">ETHITH Reality</span>, <span class="text-glow-purple">ETHITH AI</span>, <span class="text-glow-amber">ETHITH Games</span> yoki <span class="text-glow-emerald">ETHITH Solutions</span> bo‘yicha hamkorlik va murojaatlar uchun:
           </p>
         </div>
 
@@ -416,7 +376,7 @@
 
           <div class="contact-card">
             <div class="contact-card-top">
-              <span class="contact-type">RASMIY GMAIL #1</span>
+              <span class="contact-type">GMAIL #1</span>
               <button type="button" class="copy-btn" data-copy="joraboymuhammad@gmail.com">Nusxalash</button>
             </div>
             <a href="mailto:joraboymuhammad@gmail.com" class="contact-value contact-email">joraboymuhammad@gmail.com</a>
@@ -425,7 +385,7 @@
 
           <div class="contact-card">
             <div class="contact-card-top">
-              <span class="contact-type">RASMIY GMAIL #2</span>
+              <span class="contact-type">GMAIL #2</span>
               <button type="button" class="copy-btn" data-copy="muhammedjoraboyev1@gmail.com">Nusxalash</button>
             </div>
             <a href="mailto:muhammedjoraboyev1@gmail.com" class="contact-value contact-email">muhammedjoraboyev1@gmail.com</a>
@@ -442,12 +402,11 @@
             </div>
 
             <div class="creator-signature" id="creator-credit">
-              <span class="signature-badge">FOUNDER & ARCHITECT</span>
               <p class="signature-text">Company Created by <strong>Muhammadyusuf</strong> (Jo‘raboyev Muhammadyusuf)</p>
             </div>
 
             <button type="button" class="back-to-top-btn" data-scroll-to="0">
-              <span>Yuqoriga Qaytish (Teskari Video)</span>
+              <span>Yuqoriga Qaytish</span>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
             </button>
           </div>
@@ -457,6 +416,6 @@
 
   </main>
 
-  <script src="app.js?v=2026.7"></script>
+  <script src="app.js?v=2026.8"></script>
 </body>
 </html>
