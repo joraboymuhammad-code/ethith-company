@@ -114,7 +114,6 @@ body {
   object-fit: cover;
   object-position: center center;
   display: block;
-  filter: contrast(1.05) saturate(1.08);
   transform: translateZ(0);
 }
 
@@ -122,8 +121,8 @@ body {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(4, 5, 8, 0.70) 0%, rgba(4, 5, 8, 0.14) 22%, rgba(0, 0, 0, 0) 36%, rgba(0, 0, 0, 0) 64%, rgba(4, 5, 8, 0.14) 78%, rgba(4, 5, 8, 0.70) 100%),
-    linear-gradient(180deg, rgba(4, 5, 8, 0.65) 0%, rgba(0, 0, 0, 0) 14%, rgba(0, 0, 0, 0) 88%, rgba(4, 5, 8, 0.75) 100%);
+    linear-gradient(90deg, rgba(4, 5, 8, 0.45) 0%, rgba(4, 5, 8, 0.05) 18%, rgba(0, 0, 0, 0) 32%, rgba(0, 0, 0, 0) 68%, rgba(4, 5, 8, 0.05) 82%, rgba(4, 5, 8, 0.45) 100%),
+    linear-gradient(180deg, rgba(4, 5, 8, 0.45) 0%, rgba(0, 0, 0, 0) 12%, rgba(0, 0, 0, 0) 90%, rgba(4, 5, 8, 0.55) 100%);
   pointer-events: none;
 }
 
@@ -519,7 +518,7 @@ body {
 
 /* SECTION 1: HERO (Only Left Flank Card, Right-side box removed!) */
 .section-hero {
-  min-height: 140vh;
+  min-height: 130vh;
   padding: 112px 60px 60px 44px;
   display: flex;
   align-items: flex-start;
@@ -699,7 +698,7 @@ body {
 /* SECTION 2 & 3: GENESIS / FOUNDER / ARCHITECTURE */
 .section-genesis {
   min-height: 125vh;
-  padding: 80px 44px;
+  padding: 90px 44px;
   display: flex;
   align-items: center;
 }
@@ -799,7 +798,7 @@ body {
 
 /* SECTION 4: 4 POMEGRANATE SEEDS RUNWAY */
 .section-four-seeds-runway {
-  height: 320vh;
+  height: 440vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -807,14 +806,14 @@ body {
 }
 
 .seed-waypoint {
-  height: 50vh;
+  height: 60vh;
   width: 100%;
 }
 
 /* SECTION 5: COMPARISON & VALUATION */
 .section-comparison {
-  min-height: 120vh;
-  padding: 80px 44px;
+  min-height: 140vh;
+  padding: 90px 44px;
   display: flex;
   align-items: center;
 }
@@ -885,7 +884,7 @@ body {
 
 /* SECTION 6: OFFICIAL CONTACT & CREATOR FOOTER */
 .section-contact {
-  min-height: 100vh;
+  min-height: 135vh;
   padding: 100px 44px 48px;
   display: flex;
   align-items: flex-end;

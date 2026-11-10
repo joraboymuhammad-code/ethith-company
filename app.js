@@ -1,5 +1,5 @@
 /**
- * ETHITH COMPANY — V3 HYPER-NEON 300-FRAME GPU IMAGEBITMAP ENGINE
+ * ETHITH COMPANY — PURE 300-FRAME GPU IMAGEBITMAP ENGINE (ZERO-CACHE-CONFLICT & ZERO-GHOSTING)
  * Created for Jo'raboyev Muhammadyusuf | ETHITH Global Ecosystem
  */
 
@@ -9,6 +9,7 @@
   const TOTAL_FRAMES = 300;
   const CANVAS_W = 1600;
   const CANVAS_H = 900;
+  const FRAME_CACHE_BUST = 'v300_clean';
 
   const canvas = document.getElementById('scrubber-canvas');
   const ctx = canvas.getContext('2d', { alpha: false, desynchronized: true });
@@ -18,8 +19,6 @@
   const hudTime = document.getElementById('hud-time');
   const hudPct = document.getElementById('hud-pct');
   const navRingFill = document.getElementById('nav-ring-fill');
-  const topLaserBar = document.getElementById('top-laser-bar');
-  const preloadStatus = document.getElementById('preload-status');
   const fourPillarsOverlay = document.getElementById('anor-four-pillars-overlay');
 
   const navBtns = Array.from(document.querySelectorAll('.nav-btn[data-scroll-to]'));
@@ -36,17 +35,18 @@
     solutions: document.getElementById('hud-line-4')
   };
 
-  // GPU-resident ImageBitmap cache (never evicted by browser, 0.03ms draw time)
+  // GPU-resident ImageBitmap cache (300 unique frames, 0.03ms draw time)
   const bitmaps = new Array(TOTAL_FRAMES).fill(null);
   let loadedCount = 0;
-  let lastRenderedProgress = -1;
+  let lastRenderedFrameIndex = -1;
 
-  // Smooth scroll physics state
+  // Smooth scroll state
   let targetProgress = 0;
   let currentProgress = 0;
 
+  // Cache-busted frame URL guarantees browser never mixes old 150-frame cache with 300-frame set
   function frameUrl(index) {
-    return `assets/frames/f_${String(index).padStart(3, '0')}.webp`;
+    return `assets/frames/f_${String(index).padStart(3, '0')}.webp?cb=${FRAME_CACHE_BUST}`;
   }
 
   function findNearestLoadedIndex(targetIdx) {
@@ -58,55 +58,37 @@
     return -1;
   }
 
-  // Sub-frame optical cross-dissolve renderer:
-  // Blends frame[floor] and frame[ceil] on GPU canvas for 120fps liquid smoothness
+  // Pure single-frame renderer (no alpha-blend ghosting so every frame is 100% original video quality)
   function renderProgressToCanvas(progress) {
-    if (Math.abs(progress - lastRenderedProgress) < 0.00004 && lastRenderedProgress !== -1) {
+    const targetIdx = Math.min(
+      TOTAL_FRAMES - 1,
+      Math.max(0, Math.round(progress * (TOTAL_FRAMES - 1)))
+    );
+
+    if (targetIdx === lastRenderedFrameIndex && bitmaps[targetIdx]) {
       return;
     }
 
-    const exact = Math.min(TOTAL_FRAMES - 1, Math.max(0, progress * (TOTAL_FRAMES - 1)));
-    const idxA = Math.floor(exact);
-    const idxB = Math.min(TOTAL_FRAMES - 1, idxA + 1);
-    const frac = exact - idxA;
-
-    const bmpA = bitmaps[idxA] || bitmaps[findNearestLoadedIndex(idxA)];
-    if (!bmpA) return;
+    const actualIdx = bitmaps[targetIdx] ? targetIdx : findNearestLoadedIndex(targetIdx);
+    if (actualIdx === -1 || actualIdx === lastRenderedFrameIndex) return;
 
     ctx.globalAlpha = 1.0;
-    ctx.drawImage(bmpA, 0, 0, CANVAS_W, CANVAS_H);
-
-    const bmpB = bitmaps[idxB];
-    if (bmpB && bmpB !== bmpA && frac > 0.02) {
-      ctx.globalAlpha = frac;
-      ctx.drawImage(bmpB, 0, 0, CANVAS_W, CANVAS_H);
-      ctx.globalAlpha = 1.0;
-    }
-
-    lastRenderedProgress = progress;
+    ctx.drawImage(bitmaps[actualIdx], 0, 0, CANVAS_W, CANVAS_H);
+    lastRenderedFrameIndex = actualIdx;
   }
 
   async function loadFrameBitmap(idx) {
     try {
-      const resp = await fetch(frameUrl(idx), { cache: 'force-cache' });
+      const resp = await fetch(frameUrl(idx));
       if (!resp.ok) return;
       const blob = await resp.blob();
       const bmp = await createImageBitmap(blob);
       bitmaps[idx] = bmp;
       loadedCount++;
 
-      if (idx === 0 || lastRenderedProgress === -1) {
-        lastRenderedProgress = -1;
+      if (idx === 0 || lastRenderedFrameIndex === -1) {
+        lastRenderedFrameIndex = -1;
         renderProgressToCanvas(currentProgress);
-      }
-
-      if (preloadStatus) {
-        if (loadedCount < TOTAL_FRAMES) {
-          const pct = Math.round((loadedCount / TOTAL_FRAMES) * 100);
-          preloadStatus.textContent = `GPU STREAM ${pct}%`;
-        } else {
-          preloadStatus.textContent = '300 FRAMES • 120FPS LOCKED';
-        }
       }
     } catch (e) {
       const img = new Image();
@@ -133,7 +115,7 @@
     }
 
     // Priority 1: Instant hero & key 4-pomegranate-seed frames
-    [0, 1, 2, 150, 175, 190, 299].forEach(add);
+    [0, 1, 2, 135, 150, 165, 180, 195, 299].forEach(add);
     // Priority 2: Coarse stride 15 across entire video (~20 frames -> full scrub in 120ms)
     for (let i = 0; i < TOTAL_FRAMES; i += 15) add(i);
     // Priority 3: Medium stride 5
@@ -158,35 +140,77 @@
     }
   }
 
-  // Real-time tracking of the 4 floating pomegranate seeds in 1920x1080 SVG coordinate space
-  function updateFourSeedConnectors(p) {
-    let expandFactor = 0;
-    if (p <= 0.63) {
-      expandFactor = Math.min(1, Math.max(0, (p - 0.41) / (0.63 - 0.41)));
-    } else {
-      expandFactor = Math.min(1, Math.max(0, 1 - (p - 0.63) / (0.73 - 0.63)));
+  // Exact measured keyframe positions of the 4 floating ruby seeds in 1920x1080 video space
+  const SEED_KEYFRAMES = [
+    { f: 118, s1: [815, 440], s2: [1025, 345], s3: [905, 490], s4: [1085, 460] },
+    { f: 135, s1: [680, 392], s2: [1085, 255], s3: [855, 565], s4: [1212, 465] },
+    { f: 150, s1: [555, 362], s2: [1135, 188], s3: [805, 642], s4: [1328, 495] },
+    { f: 165, s1: [435, 355], s2: [1185, 128], s3: [748, 735], s4: [1455, 535] },
+    { f: 180, s1: [348, 345], s2: [1225, 102], s3: [715, 805], s4: [1542, 568] },
+    { f: 195, s1: [318, 338], s2: [1238, 88],  s3: [702, 835], s4: [1568, 582] },
+    { f: 210, s1: [425, 345], s2: [1205, 130], s3: [748, 735], s4: [1475, 548] },
+    { f: 225, s1: [645, 385], s2: [1092, 268], s3: [845, 575], s4: [1225, 495] }
+  ];
+
+  function interpolateSeedsAtFrame(frameNum) {
+    const clamped = Math.max(SEED_KEYFRAMES[0].f, Math.min(SEED_KEYFRAMES[SEED_KEYFRAMES.length - 1].f, frameNum));
+    let k0 = SEED_KEYFRAMES[0];
+    let k1 = SEED_KEYFRAMES[SEED_KEYFRAMES.length - 1];
+
+    for (let i = 0; i < SEED_KEYFRAMES.length - 1; i++) {
+      if (clamped >= SEED_KEYFRAMES[i].f && clamped <= SEED_KEYFRAMES[i + 1].f) {
+        k0 = SEED_KEYFRAMES[i];
+        k1 = SEED_KEYFRAMES[i + 1];
+        break;
+      }
     }
-    const ease = 1 - Math.pow(1 - expandFactor, 2);
 
-    // Seed 1 (Top-Left Ruby Seed - ETHITH Reality)
-    const s1x = Math.round(780 + (345 - 780) * ease);
-    const s1y = Math.round(450 + (365 - 450) * ease);
-    setConnector(1, 385, 220, 445, 220, s1x, s1y);
+    const span = Math.max(1, k1.f - k0.f);
+    const t = (clamped - k0.f) / span;
+    const lerp = (a, b) => Math.round(a + (b - a) * t);
 
-    // Seed 2 (Top-Right Ruby Seed - ETHITH AI)
-    const s2x = Math.round(1060 + (1215 - 1060) * ease);
-    const s2y = Math.round(360 + (115 - 360) * ease);
-    setConnector(2, 1535, 220, 1450, 220, s2x, s2y);
+    return {
+      s1: [lerp(k0.s1[0], k1.s1[0]), lerp(k0.s1[1], k1.s1[1])],
+      s2: [lerp(k0.s2[0], k1.s2[0]), lerp(k0.s2[1], k1.s2[1])],
+      s3: [lerp(k0.s3[0], k1.s3[0]), lerp(k0.s3[1], k1.s3[1])],
+      s4: [lerp(k0.s4[0], k1.s4[0]), lerp(k0.s4[1], k1.s4[1])]
+    };
+  }
 
-    // Seed 3 (Bottom-Left Ruby Seed - ETHITH Games)
-    const s3x = Math.round(850 + (715 - 850) * ease);
-    const s3y = Math.round(620 + (825 - 620) * ease);
-    setConnector(3, 385, 840, 500, 840, s3x, s3y);
+  // Maps viewport (clientX, clientY) to the 1920x1080 SVG viewBox (preserveAspectRatio="xMidYMid slice")
+  function clientToSvg(clientX, clientY) {
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const scale = Math.max(vw / 1920, vh / 1080);
+    const offsetX = (vw - 1920 * scale) / 2;
+    const offsetY = (vh - 1080 * scale) / 2;
+    return [
+      Math.round((clientX - offsetX) / scale),
+      Math.round((clientY - offsetY) / scale)
+    ];
+  }
 
-    // Seed 4 (Bottom-Right Ruby Seed - ETHITH Solutions)
-    const s4x = Math.round(1140 + (1540 - 1140) * ease);
-    const s4y = Math.round(520 + (595 - 520) * ease);
-    setConnector(4, 1535, 840, 1450, 840, s4x, s4y);
+  function getCardAnchorSvg(cardEl, side) {
+    if (!cardEl) return side === 'left' ? [385, 240] : [1535, 240];
+    const r = cardEl.getBoundingClientRect();
+    const cx = side === 'left' ? r.right : r.left;
+    const cy = r.top + r.height * 0.45;
+    return clientToSvg(cx, cy);
+  }
+
+  function updateFourSeedConnectors(p) {
+    const exactFrame = p * (TOTAL_FRAMES - 1);
+    const seeds = interpolateSeedsAtFrame(exactFrame);
+
+    const a1 = getCardAnchorSvg(pillarCards.reality, 'left');
+    const a2 = getCardAnchorSvg(pillarCards.ai, 'right');
+    const a3 = getCardAnchorSvg(pillarCards.games, 'left');
+    const a4 = getCardAnchorSvg(pillarCards.solutions, 'right');
+
+    setConnector(1, a1[0], a1[1], a1[0] + 45, a1[1], seeds.s1[0], seeds.s1[1]);
+    setConnector(2, a2[0], a2[1], a2[0] - 45, a2[1], seeds.s2[0], seeds.s2[1]);
+    setConnector(3, a3[0], a3[1], a3[0] + 45, a3[1], seeds.s3[0], seeds.s3[1]);
+    setConnector(4, a4[0], a4[1], a4[0] - 45, a4[1], seeds.s4[0], seeds.s4[1]);
   }
 
   function setConnector(num, x1, y1, x2, y2, tx, ty) {
@@ -210,15 +234,15 @@
 
     if (hudPct) hudPct.textContent = `${pct}%`;
     if (hudTime) hudTime.textContent = `${sec}s`;
-    if (topLaserBar) topLaserBar.style.width = `${(p * 100).toFixed(2)}%`;
 
     if (navRingFill) {
       const circumference = 94.2;
       navRingFill.style.strokeDashoffset = (circumference * (1 - p)).toFixed(2);
     }
 
-    // Show/hide the 4-Pillar Pomegranate Seed Matrix when the pomegranate is open (39% to 74%)
-    const inFourSeedZone = p >= 0.39 && p <= 0.74;
+    // Show the 4-Pillar Pomegranate Seed Matrix ONLY when the pomegranate is open (40% to 71%)
+    // and no other foreground section cards are in the viewport
+    const inFourSeedZone = p >= 0.40 && p <= 0.71;
     if (fourPillarsOverlay) {
       fourPillarsOverlay.classList.toggle('visible', inFourSeedZone);
     }
@@ -227,10 +251,10 @@
       updateFourSeedConnectors(p);
 
       let activeKey = 'all';
-      if (p >= 0.45 && p < 0.51) activeKey = 'reality';
-      else if (p >= 0.51 && p < 0.57) activeKey = 'ai';
-      else if (p >= 0.57 && p < 0.63) activeKey = 'games';
-      else if (p >= 0.63 && p < 0.70) activeKey = 'solutions';
+      if (p >= 0.43 && p < 0.50) activeKey = 'reality';
+      else if (p >= 0.50 && p < 0.57) activeKey = 'ai';
+      else if (p >= 0.57 && p < 0.64) activeKey = 'games';
+      else if (p >= 0.64 && p < 0.70) activeKey = 'solutions';
 
       Object.keys(pillarCards).forEach((key) => {
         const isFocused = activeKey === 'all' || activeKey === key;
@@ -264,7 +288,7 @@
 
   window.addEventListener('resize', () => {
     targetProgress = getScrollProgress();
-    lastRenderedProgress = -1;
+    lastRenderedFrameIndex = -1;
     renderProgressToCanvas(currentProgress);
   }, { passive: true });
 
@@ -277,8 +301,8 @@
     targetProgress = getScrollProgress();
     const delta = targetProgress - currentProgress;
 
-    if (Math.abs(delta) > 0.00006) {
-      const factor = 1 - Math.exp(-13 * dt);
+    if (Math.abs(delta) > 0.00008) {
+      const factor = 1 - Math.exp(-15 * dt);
       currentProgress += delta * factor;
     } else {
       currentProgress = targetProgress;
@@ -318,7 +342,7 @@
       }
       const orig = btn.textContent;
       btn.textContent = 'Nusxalandi ✓';
-      btn.style.background = '#00ff9d';
+      btn.style.background = '#10b981';
       btn.style.color = '#000';
       setTimeout(() => {
         btn.textContent = orig;
